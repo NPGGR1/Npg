@@ -179,7 +179,7 @@ def interpretation(first, second, mark):  ####dostaje string daje wynik
     if mark == 'r':
         string_stream_like_in_cpluspus = ""
         for i in range(0, len(oper.get_result())):
-            if oper.result[0].get_imaginary_part() == 0:
+            if oper.result[i].get_imaginary_part() == 0:
                 string_stream_like_in_cpluspus = string_stream_like_in_cpluspus + str(i) + ":  " + str(
                     oper.get_result()[i].get_real_part()) + "\n"
             else:
