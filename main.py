@@ -3,6 +3,8 @@ import math
 from tkinter import messagebox
 from tkinter.messagebox import showinfo
 from tkinter.simpledialog import askstring
+
+
 # klasa liczby oraz dzialania dodawania odejmowania mnozenia dzielenia potegowania i pierwiastkowania
 
 class Number:
@@ -40,8 +42,6 @@ class Number:
         self.imaginary_part = math.sin(angle) * module
 
 
-
-
 class Operation:
     def __init__(self, number1, number2, mark):
         self.number_1 = number1
@@ -56,9 +56,9 @@ class Operation:
                                  self.number_1.get_imaginary_part() - self.number_2.get_imaginary_part())
         elif mark == '*':
             self.result = Number((self.number_1.get_real_part() * self.number_2.get_real_part()) - (
-                        self.number_1.get_imaginary_part() * self.number_2.get_imaginary_part()),
+                    self.number_1.get_imaginary_part() * self.number_2.get_imaginary_part()),
                                  (self.number_1.get_imaginary_part() * self.number_2.get_real_part()) + (
-                                             self.number_1.get_real_part() * self.number_2.get_imaginary_part()))
+                                         self.number_1.get_real_part() * self.number_2.get_imaginary_part()))
         elif mark == '/':
             if self.number_2.module() != 0:
                 self.result = Number(((self.number_1.get_real_part() * self.number_2.get_real_part()) + (
@@ -107,7 +107,9 @@ def add_to_memory(operation_obj):
 
 def clear_memory():
     global memory
-    memory=[]
+    memory = []
+
+
 def show_memory(result_index: int):
     global memory
     global first_number
@@ -115,22 +117,23 @@ def show_memory(result_index: int):
     global expression
     if len(memory) > result_index:
         temp = memory[result_index]
-        if(temp.get_result()=="ERROR"):
+        if temp.get_result() == "ERROR":
             return "ERROR"
         if temp.get_operation() == "r":
-            info=""
-            for i in range(0,len(temp.get_result())):
-                info = info + str(i) + ":  " + str(temp.get_result()[i].get_real_part()) + "+i" + str(temp.get_result()[i].get_imaginary_part()) + "\n"
+            info = ""
+            for i in range(0, len(temp.get_result())):
+                info = info + str(i) + ":  " + str(temp.get_result()[i].get_real_part()) + "+i" + str(
+                    temp.get_result()[i].get_imaginary_part()) + "\n"
 
-            numba=int(test_message_boxx_root_choice(info))
-            if (numba>=len(temp.get_result())):
+            numba = int(test_message_boxx_root_choice(info))
+            if numba >= len(temp.get_result()):
                 expression = "ERROR"
                 input_text.set(expression)
             else:
                 input_text.set(expression)
-                x_part=temp.get_result()[numba].get_real_part()
-                y_part=temp.get_result()[numba].get_imaginary_part()
-                expression= str(x_part)+"+i"+str(y_part)
+                x_part = temp.get_result()[numba].get_real_part()
+                y_part = temp.get_result()[numba].get_imaginary_part()
+                expression = str(x_part) + "+i" + str(y_part)
                 input_text.set(expression)
         else:
             if temp.get_result().get_imaginary_part() == 0:
@@ -139,8 +142,10 @@ def show_memory(result_index: int):
                 expression = str(temp.get_result().get_real_part()) + '+i' + str(temp.get_result().get_imaginary_part())
             input_text.set(expression)
     else:
-        expression= "ERROR"
+        expression = "ERROR"
         input_text.set(expression)
+
+
 def number_str_to_number(str_number):  ##dziala
     numba = Number(0, 0)
     x_param = 0
@@ -157,6 +162,7 @@ def number_str_to_number(str_number):  ##dziala
         numba.set_both_parts(float(str_number), 0.0)
     return numba
 
+
 def interpretation(first, second, mark):  ####dostaje string daje wynik
     number__1 = number_str_to_number(first)
     number__2 = number_str_to_number(second)
@@ -166,23 +172,25 @@ def interpretation(first, second, mark):  ####dostaje string daje wynik
 
     if oper.result == "ERROR":
         return "ERROR"
-    if (mark != 'r'):
+    if mark != 'r':
         if oper.result.get_imaginary_part() == 0:
             return str(oper.result.get_real_part())
         return str(oper.result.get_real_part()) + "+i" + str(oper.result.get_imaginary_part())
-    if (mark == 'r'):
-        string_stream_like_in_cpluspus=""
-        for i in range(0,len(oper.get_result())):
+    if mark == 'r':
+        string_stream_like_in_cpluspus = ""
+        for i in range(0, len(oper.get_result())):
             if oper.result[0].get_imaginary_part() == 0:
-                string_stream_like_in_cpluspus=string_stream_like_in_cpluspus+str(i)+":  "+str(oper.get_result()[i].get_real_part())+"\n"
+                string_stream_like_in_cpluspus = string_stream_like_in_cpluspus + str(i) + ":  " + str(
+                    oper.get_result()[i].get_real_part()) + "\n"
             else:
-                string_stream_like_in_cpluspus = string_stream_like_in_cpluspus + str(i) + ":  " + str(oper.get_result()[i].get_real_part()) + "+i" + str(oper.get_result()[i].get_imaginary_part()) + "\n"
+                string_stream_like_in_cpluspus = string_stream_like_in_cpluspus + str(i) + ":  " + str(
+                    oper.get_result()[i].get_real_part()) + "+i" + str(oper.get_result()[i].get_imaginary_part()) + "\n"
 
         test_message_boxx(string_stream_like_in_cpluspus)
-        if(oper.get_result()[0].get_imaginary_part()==0):
+        if oper.get_result()[0].get_imaginary_part() == 0:
             return str(oper.get_result()[0].get_real_part())
-        return str(oper.get_result()[0].get_real_part())+"+i"+str(oper.get_result()[0].get_imaginary_part())
-    return "ERROR" # do poprawy
+        return str(oper.get_result()[0].get_real_part()) + "+i" + str(oper.get_result()[0].get_imaginary_part())
+    return "ERROR"  # do poprawy
 
 
 def result_normal(nummber):
@@ -204,9 +212,9 @@ main_window.title("Calcualtor")
 def btn_click(item):  ####add to input
     global expression
     global if_first_after_equal
-    if(if_first_after_equal):
-        expression=""
-        if_first_after_equal=0
+    if if_first_after_equal:
+        expression = ""
+        if_first_after_equal = 0
     expression = expression + str(item)
     input_text.set(expression)
 
@@ -228,7 +236,7 @@ def btn_equal():
     global witch_number
     global result_temp
     second_number = expression
-    if (second_number != ""):
+    if second_number != "":
         result_temp = str(interpretation(first_number, second_number, mark))
         first_number = result_temp
         witch_number = 1
@@ -236,17 +244,22 @@ def btn_equal():
         mark = ""
         input_text.set(result_temp)
         expression = result_temp
-        if_first_after_equal=1
+        if_first_after_equal = 1
+
+
 def iore():
     global expression
-    num=number_str_to_number(expression)
-    expression=str(num.module())+"e^i("+str(num.get_angle())
+    num = number_str_to_number(expression)
+    expression = str(num.module()) + "e^i(" + str(num.get_angle())
     input_text.set(expression)
+
+
 def etoi():
     global expression
     num = number_str_to_number(expression)
     expression = str(num.get_real_part()) + "+i" + str(num.get_imaginary_part())
     input_text.set(expression)
+
 
 def number_input(item):
     global first_number
@@ -255,27 +268,31 @@ def number_input(item):
     global mark
     global expression
     global result_temp
-    if (witch_number == 2):
+    if witch_number == 2:
         second_number = expression
         btn_equal()
         first_number = result_temp
         mark = item
         witch_number = 2
 
-    if (witch_number == 1):
+    if witch_number == 1:
         first_number = expression
         witch_number = 2
         mark = item
         expression = ""
         result = str(expression)
         input_text.set(result)
+
+
 def test_message_boxx(info):
-    messagebox.showinfo("wynik pierwiastek",info)
+    messagebox.showinfo("wynik pierwiastek", info)
 
 
 def test_message_boxx_root_choice(info):
     number = askstring("jaki wynik?", info)
     return int(number)
+
+
 input_text = StringVar()
 btn_clear()
 
@@ -296,13 +313,17 @@ input_field.pack(ipady=10)
 btns_frame = Frame(main_window, width=312, height=272.5, bg="grey")
 btns_frame.pack(side=LEFT)
 ######
-clear = Button(btns_frame, text="C", fg="black", width=10, height=3, bd=0, bg="SILVER", cursor="hand2", font="times", activebackground="silver",
+clear = Button(btns_frame, text="C", fg="black", width=10, height=3, bd=0, bg="SILVER", cursor="hand2", font="times",
+               activebackground="silver",
                command=lambda: btn_clear()).grid(row=0, column=0, padx=1, pady=1)
-I = Button(btns_frame, text="zamien na: \n a+ib",fg="black", width=10, height=3, bd=0, bg="#eee", cursor="hand2", font="times",
-               command=lambda: etoi()).grid(row=3, column=3,  padx=1, pady=1)
-E = Button(btns_frame, text="zamien na: \n exp(i)",fg="black", width=10, height=3, bd=0, bg="#eee", cursor="hand2", font="times",
-                command=lambda:iore()).grid(row=2, column=3, padx=1, pady=1)
-divide = Button(btns_frame, text="÷", fg="black", width=10, height=3, bd=0, bg="#eee", cursor="hand2", font="times", activebackground="silver",
+I = Button(btns_frame, text="zamien na: \n a+ib", fg="black", width=10, height=3, bd=0, bg="#eee", cursor="hand2",
+           font="times",
+           command=lambda: etoi()).grid(row=3, column=3, padx=1, pady=1)
+E = Button(btns_frame, text="zamien na: \n exp(i)", fg="black", width=10, height=3, bd=0, bg="#eee", cursor="hand2",
+           font="times",
+           command=lambda: iore()).grid(row=2, column=3, padx=1, pady=1)
+divide = Button(btns_frame, text="÷", fg="black", width=10, height=3, bd=0, bg="#eee", cursor="hand2", font="times",
+                activebackground="silver",
                 command=lambda: number_input("/")).grid(row=0, column=3, padx=1, pady=1)
 ######
 seven = Button(btns_frame, text="7", fg="black", width=10, height=3, bd=0, bg="white", cursor="hand2", font="times",
@@ -311,7 +332,8 @@ eight = Button(btns_frame, text="8", fg="black", width=10, height=3, bd=0, bg="w
                command=lambda: btn_click(8)).grid(row=1, column=1, padx=1, pady=1)
 nine = Button(btns_frame, text="9", fg="black", width=10, height=3, bd=0, bg="white", cursor="hand2", font="times",
               command=lambda: btn_click(9)).grid(row=1, column=2, padx=1, pady=1)
-multiply = Button(btns_frame, text="*", fg="black", width=10, height=3, bd=0, bg="#eee", cursor="hand2", font="times", activebackground="silver",
+multiply = Button(btns_frame, text="*", fg="black", width=10, height=3, bd=0, bg="#eee", cursor="hand2", font="times",
+                  activebackground="silver",
                   command=lambda: number_input("*")).grid(row=1, column=3, padx=1, pady=1)
 ######
 four = Button(btns_frame, text="4", fg="black", width=10, height=3, bd=0, bg="white", cursor="hand2", font="times",
@@ -320,7 +342,8 @@ five = Button(btns_frame, text="5", fg="black", width=10, height=3, bd=0, bg="wh
               command=lambda: btn_click(5)).grid(row=2, column=1, padx=1, pady=1)
 six = Button(btns_frame, text="6", fg="black", width=10, height=3, bd=0, bg="white", cursor="hand2", font="times",
              command=lambda: btn_click(6)).grid(row=2, column=2, padx=1, pady=1)
-minus = Button(btns_frame, text="-", fg="black", width=10, height=3, bd=0, bg="#eee", cursor="hand2", font="times", activebackground="silver",
+minus = Button(btns_frame, text="-", fg="black", width=10, height=3, bd=0, bg="#eee", cursor="hand2", font="times",
+               activebackground="silver",
                command=lambda: number_input("-")).grid(row=0, column=2, padx=1, pady=1)
 ######
 one = Button(btns_frame, text="1", fg="black", width=10, height=3, bd=0, bg="white", cursor="hand2", font="times",
@@ -329,28 +352,37 @@ two = Button(btns_frame, text="2", fg="black", width=10, height=3, bd=0, bg="whi
              command=lambda: btn_click(2)).grid(row=3, column=1, padx=1, pady=1)
 three = Button(btns_frame, text="3", fg="black", width=10, height=3, bd=0, bg="white", cursor="hand2", font="times",
                command=lambda: btn_click(3)).grid(row=3, column=2, padx=1, pady=1)
-plus = Button(btns_frame, text="+", fg="black", width=10, height=3, bd=0, bg="#eee", cursor="hand2", font="times", activebackground="silver",
-              command=lambda: number_input("+")).grid(row=0, column=1,  padx=1, pady=1)
+plus = Button(btns_frame, text="+", fg="black", width=10, height=3, bd=0, bg="#eee", cursor="hand2", font="times",
+              activebackground="silver",
+              command=lambda: number_input("+")).grid(row=0, column=1, padx=1, pady=1)
 ######
-Clear = Button(btns_frame, text='clear \n memory', fg="black", width=10, height=3, bd=0, bg="#eee", cursor="hand2", font="times", activebackground="silver",
-                command=lambda: clear_memory()).grid(row=4, column=4, padx=1, pady=1)
+Clear = Button(btns_frame, text='clear \n memory', fg="black", width=10, height=3, bd=0, bg="#eee", cursor="hand2",
+               font="times", activebackground="silver",
+               command=lambda: clear_memory()).grid(row=4, column=4, padx=1, pady=1)
 zero = Button(btns_frame, text="0", fg="black", width=10, height=3, bd=0, bg="white", cursor="hand2", font="times",
               command=lambda: btn_click(0)).grid(row=4, column=1, padx=1, pady=1)
-point = Button(btns_frame, text=".", fg="black", width=10, height=3, bd=0, bg="#eee", cursor="hand2", font="times", activebackground="silver",
+point = Button(btns_frame, text=".", fg="black", width=10, height=3, bd=0, bg="#eee", cursor="hand2", font="times",
+               activebackground="silver",
                command=lambda: btn_click(".")).grid(row=4, column=2, padx=1, pady=1)
-equals = Button(btns_frame, text="=", fg="black", width=10, height=3, bd=0, bg="#eee", cursor="hand2", font="times", activebackground="silver",
+equals = Button(btns_frame, text="=", fg="black", width=10, height=3, bd=0, bg="#eee", cursor="hand2", font="times",
+                activebackground="silver",
                 command=lambda: btn_equal()).grid(row=4, column=3, padx=1, pady=1)
 ####
-root = Button(btns_frame, text="√", fg="black", width=10, height=3, bd=0, bg="#eee", cursor="hand2", font="times", activebackground="silver",
+root = Button(btns_frame, text="√", fg="black", width=10, height=3, bd=0, bg="#eee", cursor="hand2", font="times",
+              activebackground="silver",
               command=lambda: number_input("r")).grid(row=0, column=4, padx=1, pady=1)
-power = Button(btns_frame, text="xʸ", fg="black", width=10, height=3, bd=0, bg="#eee", cursor="hand2", font="times", activebackground="silver",
+power = Button(btns_frame, text="xʸ", fg="black", width=10, height=3, bd=0, bg="#eee", cursor="hand2", font="times",
+               activebackground="silver",
                command=lambda: number_input("^")).grid(row=1, column=4, padx=1, pady=1)
-i_button = Button(btns_frame, text="+ i", fg="black", width=10, height=3, bd=0, bg="#eee", cursor="hand2", font="times", activebackground="silver",
+i_button = Button(btns_frame, text="+ i", fg="black", width=10, height=3, bd=0, bg="#eee", cursor="hand2", font="times",
+                  activebackground="silver",
                   command=lambda: btn_click("+i")).grid(row=3, column=4, padx=1, pady=1)
-i_to_e = Button(btns_frame, text="e\u2071\u1D43", fg="black", width=10, height=3, bd=0, bg="#eee", cursor="hand2", font="times", activebackground="silver",
+i_to_e = Button(btns_frame, text="e\u2071\u1D43", fg="black", width=10, height=3, bd=0, bg="#eee", cursor="hand2",
+                font="times", activebackground="silver",
                 command=lambda: btn_click("e^i(")).grid(row=2, column=4, padx=1, pady=1)
-plusminus = Button(btns_frame, text="+/-", fg="black", width=10, height=3, bd=0, bg="#eee", cursor="hand2", font="times",
-              command=lambda: btn_click('-')).grid(row=4, column=0, padx=1, pady=1)
+plusminus = Button(btns_frame, text="+/-", fg="black", width=10, height=3, bd=0, bg="#eee", cursor="hand2",
+                   font="times",
+                   command=lambda: btn_click('-')).grid(row=4, column=0, padx=1, pady=1)
 ###memory
 btng_frame = Frame(main_window, width=500, height=300, bg="grey")
 btng_frame.pack(side=RIGHT)
@@ -374,7 +406,6 @@ M9 = Button(btng_frame, text="M9", fg="black", width=10, height=3, bd=0, bg="sil
             command=lambda: show_memory(8)).grid(row=4, column=6, padx=1, pady=1)
 M10 = Button(btng_frame, text="M10", fg="black", width=10, height=3, bd=0, bg="silver", cursor="hand2", font="times",
              command=lambda: show_memory(9)).grid(row=4, column=7, padx=1, pady=1)
-
 
 main_window.mainloop()
 # END GUI
