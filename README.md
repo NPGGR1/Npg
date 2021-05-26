@@ -1,30 +1,40 @@
 ﻿# Projekt: Kalkulator
 
-![enter image description here](https://imgur.com/a/nZgmvaS)
+![Kalkulator](https://github.com/NPGGR1/Npg/blob/master/Img/kalkulator.jpg)
 
-# Files
+# Funkcjonalność
+
+1. Przeprowadzanie działań: dodawanie, odejmowanie, mnożenie, dzielenie, potęgowanie, pierwiastkowanie
+![1](https://github.com/NPGGR1/Npg/blob/master/Img/1.jpg)
+
+2. Pamięć ostatnich 10 zadań.
+![2](https://github.com/NPGGR1/Npg/blob/master/Img/2.jpg)
+
+3.	Odwołanie się do zapamiętanego zadania.
+
+4.	Czyszczenie pamięci.
+![4](https://github.com/NPGGR1/Npg/blob/master/Img/4.jpg)
+
+5.	Obsługa licz zespolonych.
+![5](https://github.com/NPGGR1/Npg/blob/master/Img/5.jpg)
+
+6.	Funkcjonalność zaproponowana przez nas czyli postać wykładnicza liczby zespolonej, a także zamiana postaci algebraicznej na wykładniczą oraz wykładniczą na algebraiczną. Ten proces nie zostaje wpisany do pamięci i zamienia dowolną liczbę na ekranie wypisaną na ekranie.
+![6](https://github.com/NPGGR1/Npg/blob/master/Img/6.jpg)
 
 
-## SmartyPants
 
-SmartyPants converts ASCII punctuation characters into "smart" typographic punctuation HTML entities. For example:
-
-|                |ASCII                          |HTML                         |
-|----------------|-------------------------------|-----------------------------|
-|Single backticks|`'Isn't this fun?'`            |'Isn't this fun?'            |
-|Quotes          |`"Isn't this fun?"`            |"Isn't this fun?"            |
-|Dashes          |`-- is en-dash, --- is em-dash`|-- is en-dash, --- is em-dash|
+## Podział pracy
 
 
-## KaTeX
+|Michał Michniak  | Jakub Pacoń| Marcin Motyl     |Michał Kaniowski                                               |
+|----------------|-------------|------------------|---------------------------|
+|Podłączanie modułów|Pomoc graficzna|Design kalkulatora|Historia
+|Szkielet kodu(class operation, class number)          |Naczelny debuger|Szata graficzna|Add to memory
+|  Operacje matematyczne (wraz z pierwiastkiem)        |Funkcje zamiana na wykładniczą i algebraiczną formę|Interface użytkownika|Clear memory
+| Przekazywanie wartości z pola input poprzez funkcje btn_click(), btn_equal(): , number_input(item)|Szukanie błędów| |Show memory
+| Konwersja ze string na obiekt "number"|Button connection| |
+| Funkcja interpretation | | |
 
-You can render LaTeX mathematical expressions using [KaTeX](https://khan.github.io/KaTeX/):
 
-The *Gamma function* satisfying $\Gamma(n) = (n-1)!\quad\forall n\in\mathbb N$ is via the Euler integral
 
-$$
-\Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.
-$$
 
-> You can find more information about **LaTeX** mathematical expressions [here](http://meta.math.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference).
-```
